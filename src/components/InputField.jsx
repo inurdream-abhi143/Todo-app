@@ -1,14 +1,12 @@
 import { useState } from "react";
 const InputField = (props) => {
-  const [inputTask, setInpuTask] = useState("");
-
   // useEffect(() => {}, []);
 
   const addTask = (e) => {
     e.preventDefault();
 
-    props.addList(inputTask);
-    setInpuTask("");
+    props.addList(e);
+    props.setInputTask("");
   };
   return (
     <>
@@ -18,15 +16,15 @@ const InputField = (props) => {
           type="text"
           placeholder="Enter the Task"
           className="add-task"
-          value={inputTask}
-          onChange={(e) => setInpuTask(e.target.value)}
+          value={props.inputTask}
+          onChange={(e) => props.setInputTask(e.target.value)}
         ></input>
         <button
           className="addbtn"
           onClick={(e) => addTask(e)}
-          disabled={inputTask.trim() === ""}
+          disabled={props.inputTask.trim() === ""}
         >
-          +
+          {props.editIndex !== null ? "U" : "+"}
         </button>
       </form>
     </>
